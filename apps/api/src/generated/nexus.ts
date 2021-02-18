@@ -19,7 +19,7 @@ declare global {
 }
 
 export interface NexusGenInputs {
-  PostCreateManyWithoutAuthorInput: { // input type
+  PostCreateNestedManyWithoutAuthorInput: { // input type
     connect?: NexusGenInputs['PostWhereUniqueInput'][] | null; // [PostWhereUniqueInput!]
     connectOrCreate?: NexusGenInputs['PostCreateOrConnectWithoutauthorInput'][] | null; // [PostCreateOrConnectWithoutauthorInput!]
     create?: NexusGenInputs['PostCreateWithoutAuthorInput'][] | null; // [PostCreateWithoutAuthorInput!]
@@ -38,7 +38,7 @@ export interface NexusGenInputs {
   PostWhereUniqueInput: { // input type
     id?: number | null; // Int
   }
-  ProfileCreateOneWithoutUserInput: { // input type
+  ProfileCreateNestedOneWithoutUserInput: { // input type
     connect?: NexusGenInputs['ProfileWhereUniqueInput'] | null; // ProfileWhereUniqueInput
     connectOrCreate?: NexusGenInputs['ProfileCreateOrConnectWithoutuserInput'] | null; // ProfileCreateOrConnectWithoutuserInput
     create?: NexusGenInputs['ProfileCreateWithoutUserInput'] | null; // ProfileCreateWithoutUserInput
@@ -57,8 +57,8 @@ export interface NexusGenInputs {
   UserCreateInput: { // input type
     email: string; // String!
     name?: string | null; // String
-    posts?: NexusGenInputs['PostCreateManyWithoutAuthorInput'] | null; // PostCreateManyWithoutAuthorInput
-    profile?: NexusGenInputs['ProfileCreateOneWithoutUserInput'] | null; // ProfileCreateOneWithoutUserInput
+    posts?: NexusGenInputs['PostCreateNestedManyWithoutAuthorInput'] | null; // PostCreateNestedManyWithoutAuthorInput
+    profile?: NexusGenInputs['ProfileCreateNestedOneWithoutUserInput'] | null; // ProfileCreateNestedOneWithoutUserInput
   }
 }
 
@@ -77,16 +77,16 @@ export interface NexusGenScalars {
 export interface NexusGenObjects {
   Mutation: {};
   Post: { // root type
-    authorId?: number | null; // Int
+    authorId: number; // Int!
     content?: string | null; // String
-    id?: number | null; // Int
-    published?: boolean | null; // Boolean
-    title?: string | null; // String
+    id: number; // Int!
+    published: boolean; // Boolean!
+    title: string; // String!
   }
   Query: {};
   User: { // root type
-    email?: string | null; // String
-    id?: number | null; // Int
+    email: string; // String!
+    id: number; // Int!
     name?: string | null; // String
   }
 }
@@ -106,23 +106,23 @@ export interface NexusGenFieldTypes {
     createDraft: NexusGenRootTypes['Post'] | null; // Post
     deleteOnePost: NexusGenRootTypes['Post'] | null; // Post
     publish: NexusGenRootTypes['Post'] | null; // Post
-    signupUser: NexusGenRootTypes['User'] | null; // User
+    signupUser: NexusGenRootTypes['User']; // User!
   }
   Post: { // field return type
-    author: NexusGenRootTypes['User'] | null; // User
-    authorId: number | null; // Int
+    author: NexusGenRootTypes['User']; // User!
+    authorId: number; // Int!
     content: string | null; // String
-    id: number | null; // Int
-    published: boolean | null; // Boolean
-    title: string | null; // String
+    id: number; // Int!
+    published: boolean; // Boolean!
+    title: string; // String!
   }
   Query: { // field return type
     feed: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
     post: NexusGenRootTypes['Post'] | null; // Post
   }
   User: { // field return type
-    email: string | null; // String
-    id: number | null; // Int
+    email: string; // String!
+    id: number; // Int!
     name: string | null; // String
     posts: NexusGenRootTypes['Post'][]; // [Post!]!
   }
